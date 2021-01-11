@@ -14,6 +14,7 @@ export function ListItem(props: ListItemProps) {
 
 export type ListProps = {
   path: Readonly<PathNode[]>;
+  relative?: boolean;
   fractionDigits?: number;
 };
 
@@ -23,6 +24,7 @@ export function NumberList(props: ListProps) {
       key={index.toString()}
       item={item}
       fractionDigits={props.fractionDigits}
+      relative={props.relative}
     />
   ));
   return <ol>{listItems}</ol>;
