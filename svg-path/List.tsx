@@ -25,5 +25,5 @@ export function NumberList(props: ListProps) {
       fractionDigits={props.fractionDigits}
     />
   ));
-  return <ul>{listItems}</ul>;
+  return <ol>{listItems}</ol>;
 }
