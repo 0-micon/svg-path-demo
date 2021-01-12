@@ -4,6 +4,7 @@ import Hello from "./Hello";
 import * as SVGPathD from "svg-path-d";
 import { PATH_SAMPLES } from "./svg-path/constants";
 import { NumberList } from "./svg-path/List";
+import { Path } from "./svg-path/Path";
 import "./style.css";
 
 interface AppProps {}
@@ -25,9 +26,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <svg viewBox="0 0 1024 1024">
-          <path d={PATH_SAMPLES.batman} />
-        </svg>
+        <Path path={path} selection={path[1]}/>
         <NumberList path={path} />
       </div>
     );
