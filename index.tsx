@@ -10,24 +10,35 @@ import "./style.css";
 interface AppProps {}
 interface AppState {
   name: string;
+  selectionIndex: number;
 }
 
 const path = SVGPathD.fromString(PATH_SAMPLES.batman);
-
 
 class App extends Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
-      name: "React"
+      name: "React",
+      selectionIndex: -1
     };
   }
+
+  selectionChange = (index: number) => {
+    this.setState({
+      selectionIndex: index
+    });
+  };
 
   render() {
     return (
       <div>
-        <Path path={path} selection={path[1]}/>
-        <NumberList path={path} />
+        <Path path={path} selection={path[this.state.selectionIndex]} />
+        <NumberList
+          click={this.selectionChange}
+          path={path}
+          selectionIndex={this.state.selectionIndex}
+        />
       </div>
     );
   }
