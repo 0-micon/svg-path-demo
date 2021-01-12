@@ -1,17 +1,7 @@
 import React from "react";
-import { asString, PathNode, getX, getY } from "svg-path-d";
+import PathItem from "./PathItem";
 
-export type NodeProps = {
-  item: PathNode;
-  fractionDigits?: number;
-};
-
-export function Node(props: NodeProps) {
-  const x0 = getX(props.item.prev);
-  const y0 = getY(props.item.prev);
-  const pathData = `M${x0} ${y0} ${asString(props.item, props.fractionDigits)}`;
-  return <path d={pathData} fill="none" stroke="yellow" strokeWidth="3" />;
-}
+import { asString, PathNode } from "svg-path-d";
 
 export type PathProps = {
   path: PathNode[];
@@ -27,7 +17,7 @@ export function Path(props: PathProps) {
     <div>
       <svg viewBox="0 0 1024 1024">
         <path d={pathData} />
-        {props.selection && <Node item={props.selection} />}
+        {props.selection && <PathItem item={props.selection} />}
       </svg>
     </div>
   );
