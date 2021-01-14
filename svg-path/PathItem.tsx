@@ -1,12 +1,15 @@
 import React from "react";
 import {
   asString,
-  PathNode,
   getX,
   getY,
+  isClosePath,
+  isMoveTo,
   isSmoothCurveTo,
-  promoteToCurve,
   isSmoothQCurveTo,
+  PathNode,
+  promoteToCurve,
+  promoteToLine,
   promoteToQCurve
 } from "svg-path-d";
 
@@ -14,18 +17,21 @@ export type Props = {
   item: PathNode;
   fractionDigits?: number;
   stroke?: string;
+  strokeDasharray?: string;
   strokeWidth?: number;
 };
 
 export default (props: Props) => {
   const stroke = props.stroke || "yellow";
   const strokeWidth = props.strokeWidth || 3;
+  const strokeDasharray = props.strokeDasharray || "3 2";
 
   return (
     <path
       d={toPath(props.item, props.fractionDigits)}
       fill="none"
       stroke={stroke}
+      strokeDasharray={strokeDasharray}
       strokeWidth={strokeWidth}
     />
   );
@@ -41,6 +47,8 @@ function toPath(item: PathNode, fractionDigits?: number): string {
     item = promoteToCurve(item);
   } else if (isSmoothQCurveTo(item)) {
     item = promoteToQCurve(item);
+  } else if (isMoveTo(item) || isClosePath(item)) {
+    item = promoteToLine(item);
   }
   return M0 + asString(item, fractionDigits);
 }
