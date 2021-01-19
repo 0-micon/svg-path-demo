@@ -7,7 +7,7 @@
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "svg-path-d": "^0.0.8"
+    "svg-path-d": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
